@@ -5,7 +5,30 @@
     mvn install
     
 ## Usage in your Java project
+Add project repository and dependencies to your pom.xml. Please, note that at the moment, only Linux x86_64 is being distributed via Maven repo.
 
+    <dependencies>
+        <dependency>
+            <groupId>biz.karms.crc64java</groupId>
+            <artifactId>crc64java-java</artifactId>
+            <version>1.0.7</version>
+        </dependency>
+        <dependency>
+            <groupId>biz.karms.crc64java</groupId>
+            <artifactId>crc64java-linux-x86_64</artifactId>
+            <version>1.0.7</version>
+        </dependency>
+    </dependencies>
+    <repositories>
+        <repository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>bintray-karm-maven</id>
+            <name>bintray</name>
+            <url>https://dl.bintray.com/karm/toys</url>
+        </repository>
+    </repositories>
     
 
 ## Acknowledgments

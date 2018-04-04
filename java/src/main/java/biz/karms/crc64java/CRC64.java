@@ -74,11 +74,11 @@ public abstract class CRC64 {
         }
     }
 
-    protected abstract String crc64String(final byte[] data);
+    public abstract String crc64String(final byte[] data);
 
-    protected abstract BigInteger crc64BigInteger(final byte[] data);
+    public abstract BigInteger crc64BigInteger(final byte[] data);
 
-    protected abstract String crc64Hex(final byte[] data);
+    public abstract String crc64Hex(final byte[] data);
 
     private static final class LibraryClassLoader extends ClassLoader {
 

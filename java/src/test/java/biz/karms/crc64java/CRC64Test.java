@@ -35,7 +35,6 @@ public class CRC64Test {
 
     @Test
     public void testCRC64() {
-        CRC64.init();
         final CRC64 s = CRC64.getInstance();
         final Map<String, String[]> data = new HashMap<String, String[]>() {{
             put("LALALALALALALALA", new String[]{"2265390610271838444", "2265390610271838444", "1f7048c1eac220ec"});

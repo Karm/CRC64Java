@@ -22,15 +22,15 @@ See crc64.h for a separate Copyright and license notice.
     <parent>
         <groupId>biz.karms.crc64java</groupId>
         <artifactId>crc64java-parent</artifactId>
-        <version>1.0.2-SNAPSHOT</version>
+        <version>1.0.7</version>
         <relativePath>../</relativePath>
     </parent>
 
     <artifactId>crc64java-java</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.7</version>
 
     <packaging>jar</packaging>
-
+    
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -61,9 +61,6 @@ See crc64.h for a separate Copyright and license notice.
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-deploy-plugin</artifactId>
-                <configuration>
-                    <skip>true</skip>
-                </configuration>
             </plugin>
         </plugins>
     </build>
