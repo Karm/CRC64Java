@@ -29,7 +29,21 @@ Add project repository and dependencies to your pom.xml. Please, note that at th
             <url>https://dl.bintray.com/karm/toys</url>
         </repository>
     </repositories>
-    
+
+#### Example
+```java
+final CRC64 crc64 = CRC64.getInstance();
+
+final BigInteger hash = crc64.crc64BigInteger("SOME DATA TO HASH".getBytes());
+System.out.println(hash.toString());
+
+final String hexHash = crc64.crc64Hex("SOME DATA TO HASH".getBytes());
+System.out.println(hexHash);
+```    
+Output:
+
+    11422352796240386699
+    9e84595997191a8b
 
 ## Acknowledgments
 
