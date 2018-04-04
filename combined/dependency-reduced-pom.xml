@@ -3,11 +3,11 @@
   <parent>
     <artifactId>crc64java-parent</artifactId>
     <groupId>biz.karms.crc64java</groupId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.2-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <artifactId>crc64java</artifactId>
-  <version>1.0.1-SNAPSHOT</version>
+  <version>1.0.2-SNAPSHOT</version>
   <build>
     <plugins>
       <plugin>
