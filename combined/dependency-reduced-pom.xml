@@ -1,103 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-This file is part of CRC64Java.
-
-CRC64Java is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-CRC64Java is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with Foobar. If not, see <http://www.gnu.org/licenses/>.
-
-See crc64.h for a separate Copyright and license notice.
--->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <parent>
-        <artifactId>crc64java-parent</artifactId>
-        <groupId>biz.karms.crc64java</groupId>
-        <version>1.0.0-SNAPSHOT</version>
-    </parent>
-    <modelVersion>4.0.0</modelVersion>
-    <artifactId>crc64java</artifactId>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <parent>
+    <artifactId>crc64java-parent</artifactId>
+    <groupId>biz.karms.crc64java</groupId>
     <version>1.0.0-SNAPSHOT</version>
-    <build>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>crc64java</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-shade-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <createSourcesJar>true</createSourcesJar>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-deploy-plugin</artifactId>
+        <configuration>
+          <skip>true</skip>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  <profiles>
+    <profile>
+      <id>linux-x86_64</id>
+      <dependencies>
+        <dependency>
+          <groupId>biz.karms.crc64java</groupId>
+          <artifactId>crc64java-linux-x86_64</artifactId>
+          <version>1.0.0-SNAPSHOT</version>
+          <scope>compile</scope>
+        </dependency>
+      </dependencies>
+    </profile>
+    <profile>
+      <id>windows-x64</id>
+      <dependencies>
+        <dependency>
+          <groupId>biz.karms.crc64java</groupId>
+          <artifactId>crc64java-windows-x86_64</artifactId>
+          <version>${project.version}</version>
+        </dependency>
+      </dependencies>
+    </profile>
+    <profile>
+      <id>release</id>
+      <build>
         <plugins>
-            <plugin>
-                <artifactId>maven-shade-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                        <configuration>
-                            <createSourcesJar>true</createSourcesJar>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <artifactId>maven-deploy-plugin</artifactId>
-                <configuration>
-                    <skip>true</skip>
-                </configuration>
-            </plugin>
+          <plugin>
+            <artifactId>maven-deploy-plugin</artifactId>
+            <configuration>
+              <skip>false</skip>
+            </configuration>
+          </plugin>
         </plugins>
-    </build>
-    <profiles>
-        <profile>
-            <id>linux-x86_64</id>
-            <dependencies>
-                <dependency>
-                    <groupId>biz.karms.crc64java</groupId>
-                    <artifactId>crc64java-linux-x86_64</artifactId>
-                    <version>1.0.0-SNAPSHOT</version>
-                    <scope>compile</scope>
-                </dependency>
-            </dependencies>
-        </profile>
-        <profile>
-            <id>windows-x64</id>
-            <dependencies>
-                <dependency>
-                    <groupId>biz.karms.crc64java</groupId>
-                    <artifactId>crc64java-windows-x86_64</artifactId>
-                    <version>${project.version}</version>
-                </dependency>
-            </dependencies>
-        </profile>
-        <profile>
-            <id>release</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <artifactId>maven-deploy-plugin</artifactId>
-                        <configuration>
-                            <skip>false</skip>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-            <dependencies>
-                <dependency>
-                    <groupId>biz.karms.crc64java</groupId>
-                    <artifactId>crc64java-windows-x86_64</artifactId>
-                    <version>${project.version}</version>
-                </dependency>
-                <dependency>
-                    <groupId>biz.karms.crc64java</groupId>
-                    <artifactId>crc64java-linux-x86_64</artifactId>
-                    <version>${project.version}</version>
-                </dependency>
-            </dependencies>
-        </profile>
-    </profiles>
+      </build>
+      <dependencies>
+        <dependency>
+          <groupId>biz.karms.crc64java</groupId>
+          <artifactId>crc64java-windows-x86_64</artifactId>
+          <version>${project.version}</version>
+        </dependency>
+        <dependency>
+          <groupId>biz.karms.crc64java</groupId>
+          <artifactId>crc64java-linux-x86_64</artifactId>
+          <version>${project.version}</version>
+        </dependency>
+      </dependencies>
+    </profile>
+  </profiles>
 </project>
 
