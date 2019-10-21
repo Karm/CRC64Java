@@ -65,6 +65,7 @@ public abstract class CRC64 {
                             Class sslClass = libCl.loadClass(CRC64Imp.class.getName());
                             instance = (CRC64) sslClass.newInstance();
                         } catch (Exception e1) {
+                            e1.printStackTrace();
                             throw new RuntimeException(e1);
                         }
                     }
@@ -95,8 +96,10 @@ public abstract class CRC64 {
                 os = "linux";
             } else if (sysOs.startsWith("WINDOWS")) {
                 os = "win";
+            } else if (sysOs.startsWith("MAC")) {
+                os = "mac";
             } else {
-                throw new UnsupportedOperationException("Only Linux and Windows is supported.");
+                throw new UnsupportedOperationException("Only Linux, Windows and Mac is supported.");
             }
             final String sysArch = System.getProperty("os.arch").toUpperCase(Locale.US);
             String arch;
