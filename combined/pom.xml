@@ -23,12 +23,12 @@ See crc64.h for a separate Copyright and license notice.
     <parent>
         <groupId>biz.karms.crc64java</groupId>
         <artifactId>crc64java-parent</artifactId>
-        <version>1.0.8-SNAPSHOT</version>
+        <version>1.0.9</version>
         <relativePath>../</relativePath>
     </parent>
 
     <artifactId>crc64java</artifactId>
-    <version>1.0.8-SNAPSHOT</version>
+    <version>1.0.9</version>
 
     <packaging>jar</packaging>
 
@@ -36,7 +36,7 @@ See crc64.h for a separate Copyright and license notice.
         <dependency>
             <groupId>biz.karms.crc64java</groupId>
             <artifactId>crc64java-java</artifactId>
-            <version>1.0.8-SNAPSHOT</version>
+            <version>1.0.9</version>
         </dependency>
     </dependencies>
     <build>
