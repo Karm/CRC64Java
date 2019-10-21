@@ -4,3 +4,4 @@
 release.properties
 target
 combined/dependency-reduced-pom.xml
+.DS_Store
