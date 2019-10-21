@@ -5,18 +5,18 @@
     mvn install
     
 ## Usage in your Java project
-Add project repository and dependencies to your pom.xml. Please, note that at the moment, only Linux x86_64 is being distributed via Maven repo.
+Add project repository and dependencies to your pom.xml. Use ```<artifactId>crc64java-mac-x86_64</artifactId>``` for Mac and ```<artifactId>crc64java-windows-x86_64</artifactId>``` for Windows.
 
     <dependencies>
         <dependency>
             <groupId>biz.karms.crc64java</groupId>
             <artifactId>crc64java-java</artifactId>
-            <version>1.0.7</version>
+            <version>1.0.9</version>
         </dependency>
         <dependency>
             <groupId>biz.karms.crc64java</groupId>
             <artifactId>crc64java-linux-x86_64</artifactId>
-            <version>1.0.7</version>
+            <version>1.0.9</version>
         </dependency>
     </dependencies>
     <repositories>
