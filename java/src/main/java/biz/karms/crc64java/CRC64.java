@@ -65,7 +65,6 @@ public abstract class CRC64 {
                             Class sslClass = libCl.loadClass(CRC64Imp.class.getName());
                             instance = (CRC64) sslClass.newInstance();
                         } catch (Exception e1) {
-                            e1.printStackTrace();
                             throw new RuntimeException(e1);
                         }
                     }
