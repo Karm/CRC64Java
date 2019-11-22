@@ -21,12 +21,14 @@ Add project repository and dependencies to your pom.xml. Use ```<artifactId>crc6
     </dependencies>
     <repositories>
         <repository>
+            <id>whalebone-github-mvn-repo</id>
+            <url>https://raw.githubusercontent.com/whalebone/mvn-repo/master</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
             <snapshots>
-                <enabled>false</enabled>
+                <enabled>true</enabled>
             </snapshots>
-            <id>bintray-karm-maven</id>
-            <name>bintray</name>
-            <url>https://dl.bintray.com/karm/toys</url>
         </repository>
     </repositories>
 
