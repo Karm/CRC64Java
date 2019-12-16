@@ -78,6 +78,8 @@ public abstract class CRC64 {
 
     public abstract BigInteger crc64BigInteger(final byte[] data);
 
+    public abstract byte[] crc64UnsignedBigEndian(final byte[] data);
+
     public abstract String crc64Hex(final byte[] data);
 
     private static final class LibraryClassLoader extends ClassLoader {

@@ -18,13 +18,17 @@ See crc64.h for a separate Copyright and license notice.
 */
 package biz.karms.crc64java;
 
-import org.junit.Test;
 
-import java.util.HashMap;
-import java.util.Map;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.nio.charset.StandardCharsets;
 import java.util.logging.Logger;
+import java.util.stream.Stream;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 /**
  * @author Michal Karm Babacek karm@fedoraproject.org
@@ -33,38 +37,59 @@ import static org.junit.Assert.assertEquals;
 public class CRC64Test {
     private static final Logger logger = Logger.getLogger(CRC64Test.class.getName());
 
-    @Test
-    public void testCRC64() {
+    static Stream<Arguments> testCRC64Data() {
+        return Stream.of(
+                Arguments.of("LALALALALALALALA", "2265390610271838444", "2265390610271838444", "1f7048c1eac220ec", "1f7048c1eac220ec"),
+                Arguments.of("seznam.cz", "6663698304406954434", "6663698304406954434", "5c7a364d548ca1c2", "5c7a364d548ca1c2"),
+                Arguments.of("example.org", "8010417359890661387", "8010417359890661387", "6f2ab825d6e7c00b", "6f2ab825d6e7c00b"),
+                Arguments.of("A", "11935289383220651030", "11935289383220651030", "a5a2aa754a5ba416", "a5a2aa754a5ba416"),
+                Arguments.of("pbHFhfYKkG.com", "18417324782760399541", "18417324782760399541", "ff977b4f8d6e92b5", "ff977b4f8d6e92b5")
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("testCRC64Data")
+    void testCRC64(final String valueToBeHashed,
+                   final String expectedBigIntegerString,
+                   final String expectedUINT64String,
+                   final String expectedHex,
+                   final String expectedBigIntegerUnsignedNormalized) {
         final CRC64 s = CRC64.getInstance();
-        final Map<String, String[]> data = new HashMap<String, String[]>() {{
-            put("LALALALALALALALA", new String[]{"2265390610271838444", "2265390610271838444", "1f7048c1eac220ec"});
-            put("seznam.cz", new String[]{"6663698304406954434", "6663698304406954434", "5c7a364d548ca1c2"});
-            put("example.org", new String[]{"8010417359890661387", "8010417359890661387", "6f2ab825d6e7c00b"});
-            put("A", new String[]{"11935289383220651030", "11935289383220651030", "a5a2aa754a5ba416"});
-        }};
+        final byte[] bytesToBeHashed = valueToBeHashed.getBytes(StandardCharsets.UTF_8);
 
         StringBuilder sb = new StringBuilder(512);
-        data.forEach((k, v) -> {
-            sb.append("\n");
-            sb.append("Bytes to be hashed:                     ");
-            sb.append(k);
-            sb.append("\n");
-            sb.append("CRC64Imp BigInteger::toString:          ");
-            String bis = s.crc64BigInteger(k.getBytes()).toString();
-            sb.append(bis);
-            assertEquals("Wrong hash.", v[0], bis);
-            sb.append("\n");
-            sb.append("CRC64Imp UINT64 string representation:  ");
-            String si = s.crc64String(k.getBytes());
-            sb.append(si);
-            assertEquals("Wrong hash.", v[1], si);
-            sb.append("\n");
-            sb.append("CRC64Imp Hex:                           ");
-            String sx = s.crc64Hex(k.getBytes());
-            sb.append(sx);
-            assertEquals("Wrong hash.", v[2], sx);
-            sb.append("\n");
-        });
+        sb.append("\n");
+        sb.append("Bytes to be hashed:                     ");
+        sb.append(valueToBeHashed);
+        sb.append("\n");
+        sb.append("CRC64Imp BigInteger::toString:          ");
+        String bis = s.crc64BigInteger(bytesToBeHashed).toString();
+        sb.append(bis);
+        assertEquals(expectedBigIntegerString, bis, "Wrong hash.");
+        sb.append("\n");
+        sb.append("CRC64Imp UINT64 string representation:  ");
+        String si = s.crc64String(bytesToBeHashed);
+        sb.append(si);
+        assertEquals(expectedUINT64String, si, "Wrong hash.");
+        sb.append("\n");
+        sb.append("CRC64Imp Hex:                           ");
+        String sx = s.crc64Hex(bytesToBeHashed);
+        sb.append(sx);
+        assertEquals(expectedHex, sx, "Wrong hash.");
+        sb.append("\n");
+        sb.append("CRC64Imp BigIntegerUnsignedNormalized:  ");
+        String biNorm = byteArrayToString(s.crc64UnsignedBigEndian(bytesToBeHashed));
+        sb.append(biNorm);
+        assertEquals(expectedBigIntegerUnsignedNormalized, biNorm, "Wrong hash.");
+        sb.append("\n");
         logger.info(sb.toString());
+    }
+
+    private static String byteArrayToString(byte[] bytes) {
+        StringBuilder s = new StringBuilder();
+        for (byte b : bytes) {
+            s.append(String.format("%02x", b & 0xFF));
+        }
+        return s.toString();
     }
 }

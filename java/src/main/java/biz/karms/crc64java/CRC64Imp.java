@@ -18,6 +18,8 @@ See crc64.h for a separate Copyright and license notice.
 */
 package biz.karms.crc64java;
 
+import biz.karms.crc64java.utils.BigIntegerNormalizer;
+
 import java.math.BigInteger;
 
 /**
@@ -33,6 +35,11 @@ public class CRC64Imp extends CRC64 {
 
     public BigInteger crc64BigInteger(final byte[] data) {
         return new BigInteger(crc64String(data));
+    }
+
+    @Override
+    public byte[] crc64UnsignedBigEndian(final byte[] data) {
+        return BigIntegerNormalizer.unsignedBigEndian(crc64BigInteger(data).toByteArray(), 8);
     }
 
     public String crc64Hex(final byte[] data) {
